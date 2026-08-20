@@ -12,9 +12,9 @@ permissions:
   pull-requests: write
 
 env:
-  DCM_PROJECT_PATH: ./
   SNOWFLAKE_USER: GH_ACTIONS_SVC_USER
   SNOWFLAKE_PASSWORD: ${{ secrets.DEPLOYER_PAT }}
+  SNOWFLAKE_AUTHENTICATOR: PROGRAMMATIC_ACCESS_TOKEN
 
 jobs:
   deploy:
@@ -22,9 +22,13 @@ jobs:
     environment: DCM_TEST
     steps:
       - uses: actions/checkout@v4
-      - uses: snowflakedb/snowflake-actions/dcm/deploy@v3
+
+      - uses: snowflakedb/snowflake-actions@v3
         with:
-          target: DCM_TEST
-          project-path: ${{ env.DCM_PROJECT_PATH }}
-          snowflake-user: ${{ env.SNOWFLAKE_USER }}
-          # allow-drops: "true"   # leave commented — this is your safety net
+          use-oidc: "false"
+
+      - name: DCM Plan
+        run: snow dcm plan --target DCM_TEST -x
+
+      - name: DCM Deploy
+        run: snow dcm deploy --target DCM_TEST -x
