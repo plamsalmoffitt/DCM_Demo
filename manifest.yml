@@ -3,6 +3,6 @@ type: DCM_PROJECT
 
 targets:
   DCM_TEST:
-    account_identifier:YGXHZPQ-LZ83996
+    account_identifier: YGXHZPQ-LZ83996
     project_name: MY_TEST.DCM_ADMIN.DEMO_PROJECT
     project_owner: DCM_DEPLOY_ROLE
