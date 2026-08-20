@@ -6,6 +6,7 @@ on:
     paths:
       - 'manifest.yml'
       - 'definitions/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
