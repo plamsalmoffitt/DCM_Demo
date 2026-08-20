@@ -12,7 +12,7 @@ permissions:
   pull-requests: write
 
 env:
-  SNOWFLAKE_ACCOUNT: EF26852        
+  SNOWFLAKE_ACCOUNT: YGXHZPQ-LZ83996        
   SNOWFLAKE_USER: GH_ACTIONS_SVC_USER
   SNOWFLAKE_PASSWORD: ${{ secrets.DEPLOYER_PAT }}
 
