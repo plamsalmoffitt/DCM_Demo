@@ -5,7 +5,7 @@ on:
     branches: ["main"]
     paths:
       - 'manifest.yml'
-      - 'definitions/**'
+      - 'sources/definitions/**'
   workflow_dispatch:
 
 permissions:
@@ -13,7 +13,7 @@ permissions:
   pull-requests: write
 
 env:
-  SNOWFLAKE_ACCOUNT: YGXHZPQ-LZ83996          
+  SNOWFLAKE_ACCOUNT: YGXHZPQ-LZ83996
   SNOWFLAKE_USER: GH_ACTIONS_SVC_USER
   SNOWFLAKE_PASSWORD: ${{ secrets.DEPLOYER_PAT }}
 
@@ -23,7 +23,6 @@ jobs:
     environment: DCM_TEST
     steps:
       - uses: actions/checkout@v4
-
       - uses: snowflakedb/snowflake-actions@v3
         with:
           use-oidc: "false"
@@ -34,7 +33,6 @@ jobs:
           --account "$SNOWFLAKE_ACCOUNT"
           --user "$SNOWFLAKE_USER"
           --password "$SNOWFLAKE_PASSWORD"
-        
 
       - name: DCM Deploy
         run: >
@@ -42,4 +40,3 @@ jobs:
           --account "$SNOWFLAKE_ACCOUNT"
           --user "$SNOWFLAKE_USER"
           --password "$SNOWFLAKE_PASSWORD"
-
