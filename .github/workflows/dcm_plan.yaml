@@ -12,10 +12,9 @@ permissions:
   pull-requests: write
 
 env:
-  SNOWFLAKE_ACCOUNT: EF26852
+  SNOWFLAKE_ACCOUNT: EF26852        
   SNOWFLAKE_USER: GH_ACTIONS_SVC_USER
   SNOWFLAKE_PASSWORD: ${{ secrets.DEPLOYER_PAT }}
-  SNOWFLAKE_AUTHENTICATOR: PROGRAMMATIC_ACCESS_TOKEN
 
 jobs:
   plan:
@@ -29,4 +28,9 @@ jobs:
           use-oidc: "false"
 
       - name: DCM Plan
-        run: snow dcm plan --target DCM_TEST -x
+        run: >
+          snow dcm plan --target DCM_TEST -x
+          --account "$SNOWFLAKE_ACCOUNT"
+          --user "$SNOWFLAKE_USER"
+          --password "$SNOWFLAKE_PASSWORD"
+          --authenticator PROGRAMMATIC_ACCESS_TOKEN
