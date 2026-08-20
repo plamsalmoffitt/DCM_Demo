@@ -12,7 +12,7 @@ permissions:
   pull-requests: write
 
 env:
-  SNOWFLAKE_ACCOUNT: EF26852          
+  SNOWFLAKE_ACCOUNT: YGXHZPQ-LZ83996          
   SNOWFLAKE_USER: GH_ACTIONS_SVC_USER
   SNOWFLAKE_PASSWORD: ${{ secrets.DEPLOYER_PAT }}
 
@@ -41,6 +41,4 @@ jobs:
           --account "$SNOWFLAKE_ACCOUNT"
           --user "$SNOWFLAKE_USER"
           --password "$SNOWFLAKE_PASSWORD"
-          --authenticator PROGRAMMATIC_ACCESS_TOKEN
-          # allow-drops flag not needed here — this is the DCM CLI, drop protection
-          # is enforced by the composite dcm/deploy action, not the raw CLI call
+
