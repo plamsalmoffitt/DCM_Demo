@@ -1,0 +1,30 @@
+name: DCM Plan (PR Preview)
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'manifest.yml'
+      - 'definitions/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  DCM_PROJECT_PATH: ./
+  SNOWFLAKE_USER: GH_ACTIONS_SVC_USER
+  SNOWFLAKE_PASSWORD: ${{ secrets.DEPLOYER_PAT }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    environment: DCM_TEST
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snowflakedb/snowflake-actions/dcm/plan@v3
+        with:
+          target: DCM_TEST
+          project-path: ${{ env.DCM_PROJECT_PATH }}
+          snowflake-user: ${{ env.SNOWFLAKE_USER }}
+          post-pr-comment: "true"

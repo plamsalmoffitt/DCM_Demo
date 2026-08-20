@@ -1,0 +1,8 @@
+manifest_version: 2
+type: DCM_PROJECT
+
+targets:
+  DCM_TEST:
+    account_identifier: EF26852   # e.g. ABCD-EFGH123, find via SELECT CURRENT_ACCOUNT();
+    project_name: MY_TEST.DCM_ADMIN.DEMO_PROJECT
+    project_owner: DCM_DEPLOY_ROLE

@@ -1,0 +1,30 @@
+name: DCM Deploy (my_test)
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'manifest.yml'
+      - 'definitions/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  DCM_PROJECT_PATH: ./
+  SNOWFLAKE_USER: GH_ACTIONS_SVC_USER
+  SNOWFLAKE_PASSWORD: ${{ secrets.DEPLOYER_PAT }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: DCM_TEST
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snowflakedb/snowflake-actions/dcm/deploy@v3
+        with:
+          target: DCM_TEST
+          project-path: ${{ env.DCM_PROJECT_PATH }}
+          snowflake-user: ${{ env.SNOWFLAKE_USER }}
+          # allow-drops: "true"   # leave commented — this is your safety net
