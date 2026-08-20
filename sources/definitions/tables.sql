@@ -8,7 +8,8 @@ DEFINE TABLE my_test.public.orders (
   order_id    NUMBER,
   customer_id NUMBER,
   order_date  DATE,
-  amount      NUMBER(10,2)
+  amount      NUMBER(10,2),
+  stap      VARCHAR
 );
 
 DEFINE TABLE my_test.public.products (
