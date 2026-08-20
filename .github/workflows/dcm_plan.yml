@@ -33,4 +33,4 @@ jobs:
           --account "$SNOWFLAKE_ACCOUNT"
           --user "$SNOWFLAKE_USER"
           --password "$SNOWFLAKE_PASSWORD"
-          --authenticator PROGRAMMATIC_ACCESS_TOKEN
+          
